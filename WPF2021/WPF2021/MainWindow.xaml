@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF2021"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="Cyan">
+        Title="MainWindow" Height="600" Width="400" Background="White">
     <Grid>
-        <Button Content="shir" Command="hallo"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"></ColumnDefinition>
+            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="99*"></ColumnDefinition>
+            <ColumnDefinition Width="99*"></ColumnDefinition>
+            <ColumnDefinition Width="98*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" Name="screen_1" FontSize="20" Grid.ColumnSpan="4" Background="White"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Name="screen" FontSize="45" Grid.ColumnSpan="4" Background="White"></TextBlock>
+        <Button Grid.Row="3" Grid.Column="4" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="C" Click="Button_Click_C"></Button>
+        <Button Grid.Row="4" Grid.Column="4" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="CE" Click="Button_Click_CE"></Button>
+        <Button Grid.Row="6" Grid.Column="1" BorderBrush="Black" BorderThickness="3" Grid.ColumnSpan="2" FontSize="40" Click="Button_Click_0" Content="0"></Button>
+        <Button Grid.Row="6" Grid.Column="3" BorderBrush="Black" BorderThickness="3" FontSize="40" Click="Button_Click_0" Content="."></Button>
+        <Button Grid.Row="5" Grid.Column="4" BorderBrush="Black" BorderThickness="3" Grid.RowSpan="2" FontSize="40" Click="Button_Click_Equal" Content="="></Button>
+        <Button Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="1" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="5" Grid.Column="2" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="2" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="5" Grid.Column="3" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="3" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="4" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="4" Grid.Column="2" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="5" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="6" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="7" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="3" Grid.Column="2" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="8" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="9" Click="Button_Click_0" ></Button>
+        <Button Grid.Row="2" Grid.Column="4" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="/" Click="Button_Click_Action"></Button>
+        <Button Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="x" Click="Button_Click_Action" ></Button>
+        <Button Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="+" Click="Button_Click_Action" ></Button>
+        <Button Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="3" FontSize="40" Content="-" Click="Button_Click_Action" ></Button> 
     </Grid>
 </Window >
