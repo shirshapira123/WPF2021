@@ -15,14 +15,12 @@ using System.Windows.Shapes;
 
 namespace WPF2021
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-
     public partial class MainWindow : Window
     {
-        string action = null;
-        double solution;
+        string action1 = null;
+        string action2 = null;
+        double prev = 0;
+        double next = 0;
         bool start = true;
         public MainWindow()
         {
@@ -38,8 +36,25 @@ namespace WPF2021
         {
             screen.Text = "";
             screen_1.Text = "";
+            start = true;
         }
         private void Button_Click_CE(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string txt = screen.Text;
+                screen.Text = "";
+                string txt_1 = screen_1.Text;
+                screen_1.Text = txt_1.Remove(txt_1.Length - txt.Length);
+            }
+            catch
+            {
+                screen.Text = "";
+                screen_1.Text = "";
+                start = true;
+            }
+        }
+        private void Button_Click_BS(object sender, RoutedEventArgs e)
         {
             if (screen.Text.Equals("Error"))
                 screen.Text = "";
@@ -52,8 +67,15 @@ namespace WPF2021
             }
             if (screen_1.Text != "")
             {
-                string txt_1 = screen_1.Text;
-                screen_1.Text = txt_1.Remove(txt_1.Length - 1);
+                string txt_1 = screen_1.Text[screen_1.Text.Length-1].ToString();
+                if(txt_1.Equals("+") || txt_1.Equals("/") || txt_1.Equals("x") || txt_1.Equals("-"))
+                {
+                    screen.Text = "";
+                    screen_1.Text = "";
+                    start = true;
+                }
+                else
+                    screen_1.Text = screen_1.Text.Remove(screen_1.Text.Length - 1);
             }
         }
         private void Button_Click_Action(object sender, RoutedEventArgs e)
@@ -62,23 +84,64 @@ namespace WPF2021
             {
                 double number = double.Parse(screen.Text);
                 if (start)
-                    solution = number;
+                {
+                    next = number;
+                    start = false;
+                    Button bt = (Button)sender;
+                    screen_1.Text += bt.Content.ToString();
+                    screen.Text = "";
+                    action2 = bt.Content.ToString();
+                }
                 else
                 {
-                    if (action.Equals("/"))
-                        solution /= number;
-                    else if (action.Equals("+"))
-                        solution += number;
-                    else if (action.Equals("x"))
-                        solution *= number;
-                    else if (action.Equals("-"))
-                        solution -= number;
+                    Button bt = (Button)sender;
+                    screen_1.Text += bt.Content.ToString();
+                    screen.Text = "";
+
+                    action1 = action2;
+                    action2 = bt.Content.ToString();
+
+                    if (action2.Equals("+") || action2.Equals("-"))
+                    {
+                        if (action1.Equals("/"))
+                        {
+                            next /= number;
+                            next += prev;
+                            prev = 0;
+                        }
+                        else if (action1.Equals("+"))
+                            next += number;
+                        else if (action1.Equals("x"))
+                        {
+                            next *= number;
+                            next += prev;
+                            prev = 0;
+                        }
+                        else if (action1.Equals("-"))
+                            next -= number;
+                    }
+                    else if (action2.Equals("x") || action2.Equals("/"))
+                    {
+                        if (action1.Equals("/"))
+                            next /= number;
+                        else if (action1.Equals("+"))
+                        {
+                            prev = next;
+                            next = 0;
+                            next += number;
+                        }
+                        else if (action1.Equals("x"))
+                        {
+                            next *= number;
+                        }
+                        else if (action1.Equals("-"))
+                        {
+                            prev = next;
+                            next = 0;
+                            next -= number;
+                        }
+                    }
                 }
-                start = false;
-                Button bt = (Button)sender;
-                screen_1.Text += bt.Content.ToString();
-                action = bt.Content.ToString();
-                screen.Text = "";
             }
             catch
             {
@@ -92,27 +155,35 @@ namespace WPF2021
             {
                 double number = double.Parse(screen.Text);
                 if (start)
-                    solution = number;
+                    next = number;
                 else
                 {
-                    if (action.Equals("/"))
-                        solution /= number;
-                    else if (action.Equals("+"))
-                        solution += number;
-                    else if (action.Equals("x"))
-                        solution *= number;
-                    else if (action.Equals("-"))
-                        solution -= number;
+                    action1 = action2;
+                    if (action1.Equals("/"))
+                    {
+                        next /= number;
+                        next += prev;
+                    }
+                    else if (action1.Equals("+"))
+                        next += number;
+                    else if (action1.Equals("x"))
+                    {
+                        next *= number;
+                        next += prev;
+                    }
+                    else if (action1.Equals("-"))
+                        next -= number;
                 }
+                screen.Text = next.ToString();
+                screen_1.Text = next.ToString();
                 start = true;
-                screen.Text = solution.ToString();
-                screen_1.Text = solution.ToString();
+                next = 0;
+                prev = 0;
             }
             catch
             {
                 screen.Text = "Error";
                 screen_1.Text = "Error";
-
             }
         }
     }
